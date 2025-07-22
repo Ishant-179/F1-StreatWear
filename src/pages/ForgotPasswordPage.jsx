@@ -55,7 +55,7 @@ function ForgotPasswordPage() {
         setOtp('');
         setNewPassword('');
         setConfirmNewPassword('');
-        setOtpSent(false); // Reset form to initial state
+        setOtpSent(false); 
       } else {
         setError(response.message || 'Password reset failed. Please check OTP and try again.');
       }

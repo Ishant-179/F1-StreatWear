@@ -64,7 +64,7 @@ function CartPage() {
           </div>
 
           <div className="mt-8 text-center">
-            {/* Checkout CTA - no actual checkout flow needed for prototype */}
+            {/* Checkout */}
             <button className="bg-f1-red hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full text-xl transition duration-300 transform hover:scale-105">
               Proceed to Checkout
             </button>

@@ -26,7 +26,7 @@ function SignUpPage() {
     try {
       const response = await register(name, email, password);
       if (response.success) {
-        navigate('/login'); // Navigate to login on successful sign-up
+        navigate('/login'); 
       } else {
         setError(response.message || 'Registration failed. Please try again.');
       }

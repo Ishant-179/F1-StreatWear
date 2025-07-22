@@ -1,22 +1,16 @@
-// context/AuthContext.jsx
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { loginUser, registerUser, sendOtpForPasswordReset, resetPassword } from '../utils/api'; // Mock API calls
+import { loginUser, registerUser, sendOtpForPasswordReset, resetPassword } from '../utils/api'; 
 
-// Create the Auth Context
 export const AuthContext = createContext(null);
 
-// Custom hook to use AuthContext (optional, but common pattern)
 export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-// Auth Provider Component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Stores user data if logged in
-  const [authToken, setAuthToken] = useState(null); // Stores authentication token
-  const [isLoading, setIsLoading] = useState(true); // To check if auth state is being loaded
-
-  // On initial load, try to retrieve token and user from localStorage
+  const [user, setUser] = useState(null); 
+  const [authToken, setAuthToken] = useState(null); 
+  const [isLoading, setIsLoading] = useState(true); 
   useEffect(() => {
     const storedToken = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('user');
@@ -32,10 +26,9 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('user');
       }
     }
-    setIsLoading(false); // Authentication state has been loaded
+    setIsLoading(false);
   }, []);
 
-  // Function to handle user login
   const login = async (email, password) => {
     setIsLoading(true);
     try {
@@ -55,13 +48,10 @@ export const AuthProvider = ({ children }) => {
       setIsLoading(false);
     }
   };
-
- 
-  // Function to handle user signup (renamed from 'signup' to 'register' for consistency with SignUpPage.jsx)
-  const register = async (name, email, password) => { // Added 'name' parameter
+  const register = async (name, email, password) => { 
     setIsLoading(true);
     try {
-      const response = await registerUser({ name, email, password }); // Pass object to registerUser
+      const response = await registerUser({ name, email, password });
       if (response.success) {
         return { success: true, message: response.message };
       }
@@ -73,8 +63,6 @@ export const AuthProvider = ({ children }) => {
       setIsLoading(false);
     }
   };
-
-  // Function to handle user logout
   const logout = () => {
     setUser(null);
     setAuthToken(null);
@@ -85,7 +73,6 @@ export const AuthProvider = ({ children }) => {
 
   const isAuthenticated = !!user && !!authToken;
 
-  // The value that will be supplied to any components consuming this context
   const authContextValue = {
     user,
     authToken,
@@ -97,7 +84,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   if (isLoading) {
-    // Optionally render a loading spinner or null while checking auth state
     return <div>Loading authentication...</div>;
   }
 

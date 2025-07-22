@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { fetchProductById } from '../utils/api'; // Use mock API to fetch product
+import { fetchProductById } from '../utils/api'; 
 import SearchInput from '../components/SearchInput';
 import { formatCurrency } from '../utils/helpers';
 
@@ -13,7 +13,6 @@ function ProductPage() {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Example of related items (static for prototype, could be fetched)
   const allRelatedItems = [
     { id: 'rel1', name: 'Race Day Socks', type: 'accessory' },
     { id: 'rel2', name: 'Formula Cap', type: 'cap' },
@@ -46,7 +45,7 @@ function ProductPage() {
     };
 
     getProduct();
-  }, [productId]); // Re-fetch if productId changes
+  }, [productId]);
 
   if (loading) {
     return <div className="p-8 text-center text-gray-600">Loading product details...</div>;
@@ -104,7 +103,6 @@ function ProductPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {(searchQuery && filteredRelatedItems.length > 0 ? filteredRelatedItems : allRelatedItems).map((item) => (
               <div key={item.id} className="bg-light-gray p-4 rounded-lg shadow-sm text-center">
-                {/* For prototype, just display name, no link to new page */}
                 <p className="font-medium text-gray-800">{item.name}</p>
               </div>
             ))}

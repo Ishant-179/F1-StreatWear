@@ -1,10 +1,7 @@
-// utils/api.js
-
 /**
- * Simulates an API call to log in a user.
- * @param {string} email - The user's email.
- * @param {string} password - The user's password.
- * @returns {Promise<object>} - A promise that resolves with user data or rejects with an error.
+ * @param {string} email 
+ * @param {string} password 
+ * @returns {Promise<object>} 
  */
 export const loginUser = async (email, password) => {
   return new Promise((resolve, reject) => {
@@ -18,34 +15,31 @@ export const loginUser = async (email, password) => {
       } else {
         reject({ success: false, message: 'Invalid credentials. Please try again.' });
       }
-    }, 1000); // Simulate 1 second network delay
+    }, 1000);
   });
 };
 
 /**
- * Simulates an API call to register a new user.
- * @param {object} userData - An object containing user registration data (name, email, password).
- * @returns {Promise<object>} - A promise that resolves with success message or rejects with an error.
+ * @param {object} userData
+ * @returns {Promise<object>} 
  */
 export const registerUser = async (userData) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (userData.email === 'existing@example.com') { // Simulate existing user
+      if (userData.email === 'existing@example.com') { 
         reject({ success: false, message: 'Email already registered.' });
-      } else if (userData.email.includes('@')) { // Basic email format check for simulation
-        // Simulate successful registration
+      } else if (userData.email.includes('@')) { 
         resolve({ success: true, message: 'Registration successful! Please login.' });
       } else {
         reject({ success: false, message: 'Invalid user data provided.' });
       }
-    }, 1500); // Simulate 1.5 seconds network delay
+    }, 1500);
   });
 };
 
 /**
- * Simulates sending an OTP to the user's email for password reset.
- * @param {string} email - The user's email.
- * @returns {Promise<object>} - A promise that resolves with success message or rejects with an error.
+ * @param {string} email 
+ * @returns {Promise<object>}
  */
 export const sendOtpForPasswordReset = async (email) => {
   return new Promise((resolve, reject) => {
@@ -61,11 +55,10 @@ export const sendOtpForPasswordReset = async (email) => {
 };
 
 /**
- * Simulates resetting the user's password with OTP verification.
- * @param {string} email - The user's email.
- * @param {string} otp - The one-time password.
- * @param {string} newPassword - The new password.
- * @returns {Promise<object>} - A promise that resolves with success message or rejects with an error.
+ * @param {string} email
+ * @param {string} otp 
+ * @param {string} newPassword
+ * @returns {Promise<object>}
  */
 export const resetPassword = async (email, otp, newPassword) => {
   return new Promise((resolve, reject) => {
@@ -83,11 +76,8 @@ export const resetPassword = async (email, otp, newPassword) => {
 };
 
 /**
- * Simulates capturing data to a Google Sheet via a backend endpoint.
- * In a real application, this would be a fetch to your own server,
- * which then handles the Google Sheets API interaction.
- * @param {object} data - The data to capture (e.g., { email, action: 'signup' }).
- * @returns {Promise<object>} - A promise that resolves with success message or rejects with an error.
+ * @param {object} data 
+ * @returns {Promise<object>} 
  */
 export const captureDataToGoogleSheet = async (data) => {
   return new Promise((resolve, reject) => {
@@ -102,12 +92,8 @@ export const captureDataToGoogleSheet = async (data) => {
   });
 };
 
-// You can add more API mock functions here for fetching products, categories, etc.
-// For instance:
 export const fetchProductsByCategory = async (categorySlug) => {
-  // In a real app, this would fetch from a database
-  // For now, it will return from your local mock data
-  const { productsData } = await import('../data/products'); // Dynamic import to avoid circular dependency
+  const { productsData } = await import('../data/products');
   return new Promise((resolve) => {
     setTimeout(() => {
       const filtered = productsData.filter(p => p.categorySlug === categorySlug);

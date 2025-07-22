@@ -18,7 +18,7 @@ function LoginPage() {
     try {
       const response = await login(email, password);
       if (response.success) {
-        navigate('/'); // Navigate to home on successful login
+        navigate('/'); 
       } else {
         setError(response.message || 'Login failed. Please check your credentials.');
       }
